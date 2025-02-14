@@ -59,6 +59,7 @@ public class Usuario {
 		this.email = usuario.email();
 		this.senha = usuario.senha();
 		this.Papeis = new HashSet<Papel>();
+		this.questionario = new Questionario();
 	}
 
 	public Long getId() {

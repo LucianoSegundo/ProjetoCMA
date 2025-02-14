@@ -58,7 +58,7 @@ public class UsuarioService {
 
 		String senhaCodificada = codSenha.encode(cadRequest.senha());
 
-		Papel papel = papelRepo.findByAutoridade("aluno").orElseThrow(()-> new CadastroNedadoException("Alve um problema interno") );
+		Papel papel = papelRepo.findByAutoridade("aluno").orElseThrow(()-> new ausenciaDeDadosException("ouve um problema interno") );
 	
 		user.addPapel(papel);
 		user.setSenha(senhaCodificada);

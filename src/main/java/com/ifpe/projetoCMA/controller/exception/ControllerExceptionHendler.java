@@ -11,6 +11,7 @@ import com.ifpe.projetoCMA.exception.AcessoNegadoException;
 import com.ifpe.projetoCMA.exception.CadastroNedadoException;
 import com.ifpe.projetoCMA.exception.EntidadeNaoEncontradaException;
 import com.ifpe.projetoCMA.exception.verificacaoCamposNulosException;
+import com.ifpe.projetoCMA.service.ausenciaDeDadosException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -63,6 +64,20 @@ public class ControllerExceptionHendler {
 	public ResponseEntity<ErroPadrao> verificacaoCamposNulos(verificacaoCamposNulosException e, HttpServletRequest request){
 		
 		HttpStatus status = HttpStatus.BAD_REQUEST;
+		ErroPadrao erro =new ErroPadrao(
+				Instant.now(),
+				status.value(),
+				e.getMessage(),
+				request.getRequestURI() );
+		
+		return ResponseEntity.status(status).body(erro);
+		
+	}
+	
+	@ExceptionHandler(ausenciaDeDadosException.class)
+	public ResponseEntity<ErroPadrao> dadosEssenciasfaltando(ausenciaDeDadosException e, HttpServletRequest request){
+		
+		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 		ErroPadrao erro =new ErroPadrao(
 				Instant.now(),
 				status.value(),

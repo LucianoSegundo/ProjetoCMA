@@ -40,6 +40,7 @@ public class QuestVack {
 	
 	public VackResponse toVackResponse() {
 		VackResponse response = new VackResponse(
+				this.id,
 				this.visuak,
 				this.auditivo,
 				this.cinestesico,
