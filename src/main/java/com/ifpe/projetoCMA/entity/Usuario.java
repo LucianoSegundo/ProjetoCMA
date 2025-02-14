@@ -14,22 +14,28 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "tb_usuario")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message ="Nome nao deve ser nulo")
+	@NotBlank(message ="Usuario nao deve ser nulo")
 	@Column(unique = true)
-	private String nome;
+	private String usuario;
 	
 	@NotBlank(message ="Email nao deve ser nulo")
 	@Column(unique = true)
 	private String email;
+	
+	@NotBlank(message ="Nome nao deve ser nula")
+	private String nome;
 	
 	@NotBlank(message ="Senha nao deve ser nula")
 	private String senha;
@@ -40,11 +46,15 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<Notificacao> notificacao;
 
+	@OneToOne(mappedBy = "autor")
+	private Questionario  questionario;
+	
 	public Usuario() {
 		super();
 	}
 	
 	public Usuario(CadastroRequest usuario) {
+		this.usuario = usuario.usuario();
 		this.nome = usuario.nome();
 		this.email = usuario.email();
 		this.senha = usuario.senha();
@@ -62,12 +72,12 @@ public class Usuario {
 		return this.Papeis.add(papel);
 	}
 
-	public String getNome() {
-		return nome;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getEmail() {

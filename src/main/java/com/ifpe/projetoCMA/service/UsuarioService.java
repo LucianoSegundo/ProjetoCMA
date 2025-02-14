@@ -45,10 +45,10 @@ public class UsuarioService {
 		if (VerificarCampos.verificarTemCamposNulos(cadRequest))
 			throw new CadastroNedadoException("Nenhum campo das informações do usuário deve ser nulo");
 
-		if (cadRequest.nome().isBlank() || cadRequest.email().isBlank() || cadRequest.senha().isBlank())
+		if (cadRequest.nome().isBlank() || cadRequest.email().isBlank() || cadRequest.senha().isBlank() || cadRequest.usuario().isBlank())
 			throw new CadastroNedadoException("Nenhum campo das informações do usuário pode estarem branco");
 
-		if (userRepo.existsByNome(cadRequest.nome()))
+		if (userRepo.existsByNome(cadRequest.usuario()))
 			throw new CadastroNedadoException("Usuario já cadastrado");
 		
 		if (userRepo.existsByEmail(cadRequest.email()))
@@ -66,7 +66,7 @@ public class UsuarioService {
 		Usuario usuarioSalvo = userRepo.save(user);
 		
 
-		CadastroResponse response = new CadastroResponse(usuarioSalvo.getNome(), "Usuario foi salvo com sucesso");
+		CadastroResponse response = new CadastroResponse(usuarioSalvo.getUsuario(), "Usuario foi salvo com sucesso");
 		return response;
 
 	}
@@ -76,7 +76,7 @@ public class UsuarioService {
 		if (VerificarCampos.verificarTemCamposNulos(loginReques))
 			throw new AcessoNegadoException("Nenhum campo da requisição de login deve ser nulo");
 
-		Usuario consulta = userRepo.findByNome(loginReques.nome())
+		Usuario consulta = userRepo.findByNome(loginReques.usuario())
 				.orElseThrow(() -> new EntidadeNaoEncontradaException("Usuario não foi encontrado"));
 		;
 
@@ -90,7 +90,7 @@ public class UsuarioService {
 	@Transactional(readOnly = true)
 	public List<CadastroResponse> ListarUsuarios( ) {
 		
-		return userRepo.findAll().stream().map(x -> new CadastroResponse(x.getNome(), "usuario")) .collect(Collectors.toList());
+		return userRepo.findAll().stream().map(x -> new CadastroResponse(x.getUsuario(), "usuario")) .collect(Collectors.toList());
 	}
 
 	private LoginResponse gerarToken(Usuario usuario) {
