@@ -1,6 +1,7 @@
 package com.ifpe.projetoCMA.service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,11 +16,14 @@ import com.ifpe.projetoCMA.controller.dto.CadastroRequest;
 import com.ifpe.projetoCMA.controller.dto.CadastroResponse;
 import com.ifpe.projetoCMA.controller.dto.LoginRequest;
 import com.ifpe.projetoCMA.controller.dto.LoginResponse;
+import com.ifpe.projetoCMA.entity.Notificacao;
 import com.ifpe.projetoCMA.entity.Papel;
+import com.ifpe.projetoCMA.entity.Questionario;
 import com.ifpe.projetoCMA.entity.Usuario;
 import com.ifpe.projetoCMA.exception.AcessoNegadoException;
 import com.ifpe.projetoCMA.exception.CadastroNedadoException;
 import com.ifpe.projetoCMA.exception.EntidadeNaoEncontradaException;
+import com.ifpe.projetoCMA.exception.ausenciaDeDadosException;
 import com.ifpe.projetoCMA.repository.PapelRepository;
 import com.ifpe.projetoCMA.repository.UsuarioRepository;
 
@@ -61,6 +65,8 @@ public class UsuarioService {
 		Papel papel = papelRepo.findByAutoridade("aluno").orElseThrow(()-> new ausenciaDeDadosException("ouve um problema interno") );
 	
 		user.addPapel(papel);
+		user.setNotificacao( new ArrayList<Notificacao>() );
+		user.setQuestionario(new Questionario());
 		user.setSenha(senhaCodificada);
 		
 		Usuario usuarioSalvo = userRepo.save(user);

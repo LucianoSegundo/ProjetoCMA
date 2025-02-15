@@ -1,6 +1,6 @@
 package com.ifpe.projetoCMA.controller.dto;
 
-public record VackRequest( int visuak, int auditivo, int cinestesico, int leituraEscrita) {
+public record VackRequest( Integer visuak, Integer auditivo, Integer cinestesico, Integer leituraEscrita) {
 
 }
 

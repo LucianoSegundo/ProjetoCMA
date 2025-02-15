@@ -1,6 +1,6 @@
 package com.ifpe.projetoCMA.controller.dto;
 
-public record HonneyRequest(int pragmatico, int teorico, int ativo, int referido) {
+public record HonneyRequest(Integer pragmatico, Integer teorico, Integer ativo, Integer referido) {
 
 }
 

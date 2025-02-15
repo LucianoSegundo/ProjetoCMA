@@ -1,5 +1,5 @@
 package com.ifpe.projetoCMA.controller.dto;
 
-public record HonneyResponse(Long id, int pragmatico, int teorico, int ativo, int referido, String estilo) {
+public record HonneyResponse(Long id, Integer pragmatico, Integer teorico, Integer ativo, Integer referido, String estilo) {
 
 }

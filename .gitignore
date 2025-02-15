@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 /bancoDesenvolvimentoProjetoCMA.db
+/bancoTesteProjetoCMA.db

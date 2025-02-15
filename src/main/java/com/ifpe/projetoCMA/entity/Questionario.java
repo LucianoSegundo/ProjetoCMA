@@ -1,5 +1,6 @@
 package com.ifpe.projetoCMA.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,10 +17,10 @@ public class Questionario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@OneToOne(mappedBy = "questionario")
+	@OneToOne(mappedBy = "questionario", cascade = CascadeType.ALL,  orphanRemoval = true )
 	private QuestHonney questHonney;
 	
-	@OneToOne(mappedBy = "questionario")
+	@OneToOne(mappedBy = "questionario", cascade = CascadeType.ALL,  orphanRemoval = true )
 	private QuestVack vack;
 	
 	@OneToOne
@@ -28,6 +29,8 @@ public class Questionario {
 
 	public Questionario() {
 		super();
+		this.vack = new QuestVack();
+		this.questHonney = new QuestHonney();
 	}
 
 	public long getId() {

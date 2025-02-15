@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.ifpe.projetoCMA.exception.AcessoNegadoException;
 import com.ifpe.projetoCMA.exception.CadastroNedadoException;
 import com.ifpe.projetoCMA.exception.EntidadeNaoEncontradaException;
+import com.ifpe.projetoCMA.exception.ausenciaDeDadosException;
+import com.ifpe.projetoCMA.exception.operacaoNaoPermitidaException;
 import com.ifpe.projetoCMA.exception.verificacaoCamposNulosException;
-import com.ifpe.projetoCMA.service.ausenciaDeDadosException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -48,6 +49,20 @@ public class ControllerExceptionHendler {
 	
 	@ExceptionHandler(CadastroNedadoException.class)
 	public ResponseEntity<ErroPadrao> cadastroNegado(CadastroNedadoException e, HttpServletRequest request){
+		
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+		ErroPadrao erro =new ErroPadrao(
+				Instant.now(),
+				status.value(),
+				e.getMessage(),
+				request.getRequestURI() );
+		
+		return ResponseEntity.status(status).body(erro);
+		
+	}
+	
+	@ExceptionHandler(operacaoNaoPermitidaException.class)
+	public ResponseEntity<ErroPadrao> operacaoNaoPermitida(operacaoNaoPermitidaException e, HttpServletRequest request){
 		
 		HttpStatus status = HttpStatus.UNAUTHORIZED;
 		ErroPadrao erro =new ErroPadrao(

@@ -1,5 +1,6 @@
 package com.ifpe.projetoCMA.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,11 +47,15 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<Notificacao> notificacao;
 
-	@OneToOne(mappedBy = "autor")
+	@OneToOne(mappedBy = "autor", cascade = CascadeType.ALL,  orphanRemoval = true )
 	private Questionario  questionario;
 	
 	public Usuario() {
 		super();
+		
+		this.Papeis = new HashSet<Papel>();
+		this.questionario = new Questionario();
+		this.notificacao = new ArrayList<Notificacao>();
 	}
 	
 	public Usuario(CadastroRequest usuario) {
@@ -60,6 +65,7 @@ public class Usuario {
 		this.senha = usuario.senha();
 		this.Papeis = new HashSet<Papel>();
 		this.questionario = new Questionario();
+		this.notificacao = new ArrayList<Notificacao>();
 	}
 
 	public Long getId() {
@@ -111,6 +117,22 @@ public class Usuario {
 
 	public void setNotificacao(List<Notificacao> notificacao) {
 		this.notificacao = notificacao;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Questionario getQuestionario() {
+		return questionario;
+	}
+
+	public void setQuestionario(Questionario questionario) {
+		this.questionario = questionario;
 	}
 
 	

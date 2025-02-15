@@ -1,4 +1,4 @@
-package com.ifpe.projetoCMA.service;
+package com.ifpe.projetoCMA.exception;
 
 public class ausenciaDeDadosException extends RuntimeException {
 
