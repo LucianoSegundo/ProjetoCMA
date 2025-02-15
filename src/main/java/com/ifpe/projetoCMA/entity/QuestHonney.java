@@ -41,6 +41,8 @@ public class QuestHonney {
 
 	
 	public String retornarEstilo() {
+		if(this.ativo ==0 && this.pragmatico ==0 && this.referido ==0 && this.teorico == 0)return "Sem estilo definido";
+
 		
 		return "Ainda não implementado"; 
 	}

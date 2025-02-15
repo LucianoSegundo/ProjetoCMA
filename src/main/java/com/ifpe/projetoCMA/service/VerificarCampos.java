@@ -49,6 +49,8 @@ public class VerificarCampos {
 	}
 
     public static boolean validarSenha(String senha) {
+    	if(senha == null || senha.isBlank()) return false;
+    	
         String regex = "^(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(senha);

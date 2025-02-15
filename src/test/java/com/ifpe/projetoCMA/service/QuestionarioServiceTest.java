@@ -150,7 +150,7 @@ class QuestionarioServiceTest {
 		}, "quarta posiçao não foi verificada");
 	}
 
-	// Testar Exclução de Questionarios
+	// Testar Exclução de Questionario
 
 	@Test
 	@DisplayName("Excluir QuestHonney Com Sucesso")

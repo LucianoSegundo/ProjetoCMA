@@ -57,6 +57,14 @@ public class UsuarioService {
 		
 		if (userRepo.existsByEmail(cadRequest.email()))
 			throw new CadastroNedadoException("Email já em uso.");
+		
+		if (VerificarCampos.validarSenha(cadRequest.senha())  == false)
+			throw new CadastroNedadoException("Senha muito franca, precisa de no minimo 8 digitos, 1 numero e 1 caracter especial");
+		
+		if (VerificarCampos.validarEmail(cadRequest.email()) == false)
+			throw new CadastroNedadoException("Email invalido");
+		
+
 
 		Usuario user = new Usuario(cadRequest);
 
@@ -65,8 +73,6 @@ public class UsuarioService {
 		Papel papel = papelRepo.findByAutoridade("aluno").orElseThrow(()-> new ausenciaDeDadosException("ouve um problema interno") );
 	
 		user.addPapel(papel);
-		user.setNotificacao( new ArrayList<Notificacao>() );
-		user.setQuestionario(new Questionario());
 		user.setSenha(senhaCodificada);
 		
 		Usuario usuarioSalvo = userRepo.save(user);
@@ -79,10 +85,14 @@ public class UsuarioService {
 	
 	@Transactional(readOnly = true)
 	public LoginResponse Login(LoginRequest loginReques) {
+		
 		if (VerificarCampos.verificarTemCamposNulos(loginReques))
 			throw new AcessoNegadoException("Nenhum campo da requisição de login deve ser nulo");
 
-		Usuario consulta = userRepo.findByNome(loginReques.usuario())
+		if (loginReques.senha().isBlank() || loginReques.usuario().isBlank())
+			throw new AcessoNegadoException("Nenhum campo da requisição de login pode estar vazio");
+
+		Usuario consulta = userRepo.findByUsuario(loginReques.usuario())
 				.orElseThrow(() -> new EntidadeNaoEncontradaException("Usuario não foi encontrado"));
 		;
 
@@ -99,7 +109,7 @@ public class UsuarioService {
 		return userRepo.findAll().stream().map(x -> new CadastroResponse(x.getUsuario(), "usuario")) .collect(Collectors.toList());
 	}
 
-	private LoginResponse gerarToken(Usuario usuario) {
+	public  LoginResponse gerarToken(Usuario usuario) {
 
 		Instant now = Instant.now();
 		Long expiresIn = 300L;

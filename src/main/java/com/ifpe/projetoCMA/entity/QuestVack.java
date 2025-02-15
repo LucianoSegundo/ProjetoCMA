@@ -52,6 +52,7 @@ public class QuestVack {
 	
 	
 public String retornarEstilo() {
+		if(this.auditivo ==0 && this.auditivo ==0 && this.cinestesico ==0 && this.leituraEscrita == 0)return "Sem estilo definido";
 		
 		return "Ainda não implementado"; 
 	}
