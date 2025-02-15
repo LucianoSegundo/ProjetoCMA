@@ -26,14 +26,14 @@ public class QuestionarioService {
 		return null;
 	}
 
-	public void deletarHonney(String senha, long userId) {
+	public HonneyResponse deletarHonney(String senha, long userId) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	};
 	
-	public void deletarVack(String senha, long userId) {
+	public VackResponse deletarVack(String senha, long userId) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	};
 
 }

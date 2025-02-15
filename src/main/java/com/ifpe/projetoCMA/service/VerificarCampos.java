@@ -40,7 +40,9 @@ public class VerificarCampos {
 	}
 
 	public static boolean validarEmail(String email) {
-		String regex = "^[A-Za-z0-9+_.-]+@(.+)$"; 
+		if(email == null || email.isBlank()) return false;
+		
+	    String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"; 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
