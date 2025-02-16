@@ -1,5 +1,7 @@
 package com.ifpe.projetoCMA.entity;
 
+import com.ifpe.projetoCMA.controller.dto.QuestionarioResponse;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +32,14 @@ public class Questionario {
 	public Questionario() {
 		super();
 		this.vack = new QuestVack();
+		this.vack.setQuestionario(this);
 		this.questHonney = new QuestHonney();
+		this.questHonney.setQuestionario(this);
+	}
+	
+	public QuestionarioResponse toResponse() {
+		return new QuestionarioResponse(id, vack.toVackResponse() , questHonney.toHonneyResponse());
+		
 	}
 
 	public long getId() {

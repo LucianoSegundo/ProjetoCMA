@@ -1,5 +1,6 @@
 package com.ifpe.projetoCMA.entity;
 
+import com.ifpe.projetoCMA.controller.dto.HonneyRequest;
 import com.ifpe.projetoCMA.controller.dto.VackRequest;
 import com.ifpe.projetoCMA.controller.dto.VackResponse;
 
@@ -32,6 +33,10 @@ public class QuestVack {
 	}
 	
 	public QuestVack(VackRequest vack) {
+	this.preecher(vack);
+	}
+	
+	public void preecher(VackRequest vack) {
 		this.auditivo = vack.auditivo();
 		this.cinestesico = vack.cinestesico();
 		this.visuak = vack.visuak();
@@ -103,5 +108,13 @@ public Questionario getQuestionario() {
 
 public void setQuestionario(Questionario questionario) {
 	this.questionario = questionario;
+}
+
+public void serar() {
+	this.auditivo = 0;
+	this.cinestesico = 0;
+	this.visuak = 0;
+	this.leituraEscrita = 0;
+	
 }
 }

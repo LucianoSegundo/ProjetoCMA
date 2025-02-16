@@ -30,45 +30,44 @@ public class QuestionarioController {
 		this.questiServi = questiServi;
 	}
 	
-	
 	@Operation( summary = "Rota para o registro do Questionario Honney" , description = "Rota requer autenticação, deve ser anexado o token de autenticação, adiquirido no momento do login, ao cabeçalho da requisição..")
-	@ApiResponse(responseCode = "200", description = "cadastro bem sucedido")
-	@ApiResponse(responseCode = "400", description = "cadastro negado devido a campos nulos")
+	@ApiResponse(responseCode = "200", description = "cadastro do questionario bem sucedido")
+	@ApiResponse(responseCode = "401", description = "cadastro de questionario negado devido a campos nulos")
+	@ApiResponse(responseCode = "404", description = "Nenhum usuário com este id")	
 	@PostMapping(value = "/honney")
 	public ResponseEntity<HonneyResponse> responderHonney(JwtAuthenticationToken token, @RequestBody HonneyRequest request){
-		try {
+		
 			
 			long userId = Long.parseLong(token.getName());
 			HonneyResponse response = questiServi.responderHonney(request, userId);
 			
 			
 			return ResponseEntity.ok(null);
-		} catch (Exception e) {
-			throw e;
-		}
+		
 		
 	}
 
 	@Operation( summary = "Rota para o registro do Questionario Vack" , description = "Rota requer autenticação, vincula o questionario Vack enviado id de usuario presente no token")
 	@ApiResponse(responseCode = "200", description = "cadastro bem sucedido")
-	@ApiResponse(responseCode = "400", description = "cadastro negado devido a campos nulos")	
+	@ApiResponse(responseCode = "401", description = "cadastro negado devido a campos nulos")	
+	@ApiResponse(responseCode = "404", description = "Nenhum usuário com este id")	
+
 	@PostMapping(value = "/vack")
 	public ResponseEntity<VackResponse> responderVack(JwtAuthenticationToken token, @RequestBody VackRequest request){
-		try {
+	
 			
 			long userId = Long.parseLong(token.getName());
 			VackResponse response = questiServi.responderVack(request, userId);
 			
 			
 			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			throw e;
-		}
+		
 		
 	}
 
 	@Operation( summary = "Rota para coletar o questionario do usuario" , description = "Rota requer autenticação, deve ser anexado o token de autenticação, adiquirido no momento do login, ao cabeçalho da requisição. retorna ambos os questionarios")
 	@ApiResponse(responseCode = "200", description = "coleta bem sucedido")
+	@ApiResponse(responseCode = "404", description = "Nenhum usuário com este id")	
 	@GetMapping(value = "/")
 	public ResponseEntity<QuestionarioResponse> coletarQuestionario(JwtAuthenticationToken token){
 		
@@ -77,13 +76,13 @@ public class QuestionarioController {
 		return ResponseEntity.ok(response);
 	}
 	
-	
 	@Operation( summary = "Rota para deletar o questionario HonneyAlonso do usuario" , description = "Rota requer autenticação, serve para deletar o questionario honneyAlonso do usuario, deixando o espaço com um questionario zerado, recebe a senha do usuario no corpo do requisição")
 	@ApiResponse(responseCode = "200", description = "exclusão bem sucedido")
 	@ApiResponse(responseCode = "401", description = "exclusão negada")
+	@ApiResponse(responseCode = "404", description = "Nenhum usuário com este id")	
 	@DeleteMapping(value = "/honney")
 	public ResponseEntity deletarHonney(JwtAuthenticationToken token, @RequestBody String senha) {
-		try {
+		
 			
 			long userId = Long.parseLong(token.getName());
 
@@ -91,29 +90,23 @@ public class QuestionarioController {
 			
 			return ResponseEntity.ok().build();
 			
-		} catch (Exception e) {
-			throw e;
-		}
+		
 		
 	}
 
-
+	
 	@Operation( summary = "Rota para deletar o questionario Vack do usuario" , description = "Rota requer autenticação, serve para deletar o questionario vack do usuario, deixando o espaço com um questionario zerado, recebe a senha do usuario no corpo do requisição")
 	@ApiResponse(responseCode = "200", description = "exclusão bem sucedido")
 	@ApiResponse(responseCode = "401", description = "exclusão negada")
+	@ApiResponse(responseCode = "404", description = "Nenhum usuário com este id")	
 	@DeleteMapping(value = "/vack")
 	public ResponseEntity deletarVack(JwtAuthenticationToken token, @RequestBody String senha) {
-		try {
 			
 			long userId = Long.parseLong(token.getName());
 
 			questiServi.deletarVack( senha, userId );
 			
 			return ResponseEntity.ok().build();
-			
-		} catch (Exception e) {
-			throw e;
-		}
 		
 	}
 }

@@ -2,6 +2,7 @@ package com.ifpe.projetoCMA.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.opaqueToken;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,8 +10,12 @@ import java.util.HashSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.ifpe.projetoCMA.controller.dto.HonneyRequest;
@@ -34,27 +39,30 @@ class QuestionarioServiceTest {
 	private QuestionarioService service;
 	
 	@Autowired
+	private BCryptPasswordEncoder codSenha;
+
+	@Autowired
 	private  UsuarioRepository userRepo;
 	
-	private static Usuario user = new Usuario();
-
+	private Usuario user = new Usuario();
+	private static String acrescimo = "";
+	private String senha = "Q1234567!";
 	@BeforeEach
 	void criarUsuario() {
 		// antes de  rodar qualquer teste, criar um usuário.
 		
-		if(user.getId() == null) {
+		acrescimo +="a";
+		
 		System.out.println(" Usuario Criado com sucesso");
-		user.setUsuario("caio");
+		user.setUsuario(acrescimo+"caio");
 		user.setNome("henrique");
-		user.setEmail("email@gamil.com");
-		user.setSenha("Q1234567!");
+		user.setEmail(acrescimo+"email@gamil.com");
+		user.setSenha(codSenha.encode(senha));
 		user.addPapel(new Papel("aluno", new HashSet<Usuario>()));		
-		} else {
-		user.setQuestionario(new Questionario());
 		user.setNotificacao( new ArrayList<Notificacao>());
-		}
 		
 		user = userRepo.save(user);
+		
 	
 	}
 	
@@ -159,7 +167,7 @@ class QuestionarioServiceTest {
 	
 		 service.responderHonney(request, user.getId());
 		
-		 HonneyResponse response = service.deletarHonney(user.getSenha(), user.getId());
+		 HonneyResponse response = service.deletarHonney(senha, user.getId());
 		 
 		 assertThat(response).describedAs("QuestHonney retornou nulo").isNotNull();
 		 assertThat(response.ativo()).describedAs("Ativo não foi excluido").isEqualTo(0);
@@ -187,11 +195,12 @@ class QuestionarioServiceTest {
 	@Test
 	@DisplayName("Excluir QuestVack Com Sucesso")
 	void excluirQuestVack() {
+		
 		 VackRequest request = new VackRequest(1, 2, 3, 4);
 		
 		 service.responderVack(request, user.getId());
 		
-		 VackResponse response = service.deletarVack(user.getSenha(), user.getId());
+		 VackResponse response = service.deletarVack(senha, user.getId());
 		 
 		 assertThat(response).describedAs("QuestVack retornou nulo").isNotNull();
 		 assertThat(response.auditivo()).describedAs("auditivo não foi excluido").isEqualTo(0);
@@ -205,6 +214,8 @@ class QuestionarioServiceTest {
 	@Test
 	@DisplayName("Excluir QuestVack Com Senha Errada")
 	void excluirQuestVackComSenhaErrada() {
+		
+
 		VackRequest request = new VackRequest(1, 2, 3, 4);
 		
 		 service.responderVack(request, user.getId());

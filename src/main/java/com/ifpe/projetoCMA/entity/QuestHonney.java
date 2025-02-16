@@ -33,6 +33,10 @@ public class QuestHonney {
 	}
 	
 	public QuestHonney(HonneyRequest honney) {
+		this.preecher(honney);
+	}
+	
+	public void preecher(HonneyRequest honney) {
 		this.pragmatico = honney.pragmatico();
 		this.teorico = honney.teorico();
 		this.ativo = honney.ativo();
@@ -105,6 +109,14 @@ public class QuestHonney {
 
 	public void setQuestionario(Questionario questionario) {
 		this.questionario = questionario;
+	}
+
+	public void serar() {
+		this.pragmatico =0;
+		this.teorico = 0;
+		this.ativo = 0;
+		this.referido = 0;
+		
 	}
 	
 	

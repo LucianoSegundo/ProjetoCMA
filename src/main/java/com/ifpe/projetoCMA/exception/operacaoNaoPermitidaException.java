@@ -2,11 +2,11 @@ package com.ifpe.projetoCMA.exception;
 
 public class operacaoNaoPermitidaException extends RuntimeException {
 
-	operacaoNaoPermitidaException(){
+	public operacaoNaoPermitidaException(){
 		super();
 	}
 	
-	operacaoNaoPermitidaException(String mensagem){
+	public operacaoNaoPermitidaException(String mensagem){
 		super(mensagem);
 	}
 }
