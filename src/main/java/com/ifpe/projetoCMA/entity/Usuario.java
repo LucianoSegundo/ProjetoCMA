@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -41,6 +42,15 @@ public class Usuario {
 	@NotBlank(message ="Senha nao deve ser nula")
 	private String senha;
 	
+	// mapeamento de entidades 
+	
+	@OneToMany(mappedBy = "professor")
+	private List<Turma> turmasCProfessor;
+	
+	@ManyToMany(mappedBy = "Alunos")
+	private List<Turma> turmasCAluno;
+
+	
 	@ManyToMany(mappedBy = "usuarios")
 	Set<Papel> Papeis;
 	
@@ -56,6 +66,8 @@ public class Usuario {
 		this.Papeis = new HashSet<Papel>();
 		this.questionario = new Questionario(this);
 		this.notificacao = new ArrayList<Notificacao>();
+		this.turmasCAluno = new ArrayList<Turma>();
+		this.turmasCProfessor = new  ArrayList<Turma>();
 	}
 	
 	public Usuario(CadastroRequest usuario) {
@@ -66,6 +78,8 @@ public class Usuario {
 		this.Papeis = new HashSet<Papel>();
 		this.questionario = new Questionario(this);
 		this.notificacao = new ArrayList<Notificacao>();
+		this.turmasCAluno = new ArrayList<Turma>();
+		this.turmasCProfessor = new  ArrayList<Turma>();
 	}
 
 	public Long getId() {
