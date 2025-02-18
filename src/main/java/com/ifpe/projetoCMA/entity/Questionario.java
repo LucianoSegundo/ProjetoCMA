@@ -31,10 +31,13 @@ public class Questionario {
 
 	public Questionario() {
 		super();
-		this.vack = new QuestVack();
-		this.vack.setQuestionario(this);
-		this.questHonney = new QuestHonney();
-		this.questHonney.setQuestionario(this);
+		
+	}
+	public Questionario(Usuario autor) {
+		super();
+		this.vack = new QuestVack(this);
+		this.questHonney = new QuestHonney(this);
+		this.autor = autor;
 	}
 	
 	public QuestionarioResponse toResponse() {

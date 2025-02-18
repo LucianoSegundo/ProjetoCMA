@@ -54,8 +54,7 @@ public class Usuario {
 		super();
 		
 		this.Papeis = new HashSet<Papel>();
-		this.questionario = new Questionario();
-		this.questionario.setAutor(this);
+		this.questionario = new Questionario(this);
 		this.notificacao = new ArrayList<Notificacao>();
 	}
 	
@@ -65,9 +64,7 @@ public class Usuario {
 		this.email = usuario.email();
 		this.senha = usuario.senha();
 		this.Papeis = new HashSet<Papel>();
-		this.questionario = new Questionario();
-		this.questionario.setAutor(this);
-
+		this.questionario = new Questionario(this);
 		this.notificacao = new ArrayList<Notificacao>();
 	}
 

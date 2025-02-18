@@ -28,12 +28,21 @@ public class QuestHonney {
 	@JoinColumn(name = "questionario_id")
 	private Questionario  questionario;
 	
+	
 	public QuestHonney() {
 		super();
+
 	}
 	
-	public QuestHonney(HonneyRequest honney) {
+	public QuestHonney(Questionario  questionario) {
+		super();
+		this.questionario = questionario;
+
+	}
+	
+	public QuestHonney(HonneyRequest honney,Questionario  questionario) {
 		this.preecher(honney);
+		this.questionario = questionario;
 	}
 	
 	public void preecher(HonneyRequest honney) {
@@ -41,6 +50,7 @@ public class QuestHonney {
 		this.teorico = honney.teorico();
 		this.ativo = honney.ativo();
 		this.referido = honney.referido();
+
 	}
 
 	
