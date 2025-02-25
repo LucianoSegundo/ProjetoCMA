@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.ifpe.projetoCMA.controller.dto.CadastroRequest;
+import com.ifpe.projetoCMA.controller.dto.request.CadastroRequest;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

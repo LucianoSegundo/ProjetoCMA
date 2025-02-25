@@ -12,10 +12,10 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ifpe.projetoCMA.controller.dto.CadastroRequest;
-import com.ifpe.projetoCMA.controller.dto.CadastroResponse;
-import com.ifpe.projetoCMA.controller.dto.LoginRequest;
-import com.ifpe.projetoCMA.controller.dto.LoginResponse;
+import com.ifpe.projetoCMA.controller.dto.request.CadastroRequest;
+import com.ifpe.projetoCMA.controller.dto.request.LoginRequest;
+import com.ifpe.projetoCMA.controller.dto.response.CadastroResponse;
+import com.ifpe.projetoCMA.controller.dto.response.LoginResponse;
 import com.ifpe.projetoCMA.entity.Notificacao;
 import com.ifpe.projetoCMA.entity.Papel;
 import com.ifpe.projetoCMA.entity.Questionario;

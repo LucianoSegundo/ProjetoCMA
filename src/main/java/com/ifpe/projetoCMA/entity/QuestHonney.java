@@ -1,7 +1,7 @@
 package com.ifpe.projetoCMA.entity;
 
-import com.ifpe.projetoCMA.controller.dto.HonneyRequest;
-import com.ifpe.projetoCMA.controller.dto.HonneyResponse;
+import com.ifpe.projetoCMA.controller.dto.request.HonneyRequest;
+import com.ifpe.projetoCMA.controller.dto.response.HonneyResponse;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

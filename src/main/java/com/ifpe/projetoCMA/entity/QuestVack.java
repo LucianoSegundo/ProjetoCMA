@@ -1,8 +1,8 @@
 package com.ifpe.projetoCMA.entity;
 
-import com.ifpe.projetoCMA.controller.dto.HonneyRequest;
-import com.ifpe.projetoCMA.controller.dto.VackRequest;
-import com.ifpe.projetoCMA.controller.dto.VackResponse;
+import com.ifpe.projetoCMA.controller.dto.request.HonneyRequest;
+import com.ifpe.projetoCMA.controller.dto.request.VackRequest;
+import com.ifpe.projetoCMA.controller.dto.response.VackResponse;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

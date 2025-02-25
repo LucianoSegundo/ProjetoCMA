@@ -18,11 +18,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.ifpe.projetoCMA.controller.dto.HonneyRequest;
-import com.ifpe.projetoCMA.controller.dto.HonneyResponse;
-import com.ifpe.projetoCMA.controller.dto.QuestionarioResponse;
-import com.ifpe.projetoCMA.controller.dto.VackRequest;
-import com.ifpe.projetoCMA.controller.dto.VackResponse;
+import com.ifpe.projetoCMA.controller.dto.request.HonneyRequest;
+import com.ifpe.projetoCMA.controller.dto.request.VackRequest;
+import com.ifpe.projetoCMA.controller.dto.response.HonneyResponse;
+import com.ifpe.projetoCMA.controller.dto.response.QuestionarioResponse;
+import com.ifpe.projetoCMA.controller.dto.response.VackResponse;
 import com.ifpe.projetoCMA.entity.Notificacao;
 import com.ifpe.projetoCMA.entity.Papel;
 import com.ifpe.projetoCMA.entity.Questionario;

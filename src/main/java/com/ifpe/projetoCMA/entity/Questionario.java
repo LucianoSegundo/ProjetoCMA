@@ -1,6 +1,6 @@
 package com.ifpe.projetoCMA.entity;
 
-import com.ifpe.projetoCMA.controller.dto.QuestionarioResponse;
+import com.ifpe.projetoCMA.controller.dto.response.QuestionarioResponse;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
