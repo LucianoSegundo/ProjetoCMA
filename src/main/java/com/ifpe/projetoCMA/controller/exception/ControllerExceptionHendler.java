@@ -12,6 +12,7 @@ import com.ifpe.projetoCMA.exception.CadastroNedadoException;
 import com.ifpe.projetoCMA.exception.EntidadeNaoEncontradaException;
 import com.ifpe.projetoCMA.exception.ausenciaDeDadosException;
 import com.ifpe.projetoCMA.exception.operacaoNaoPermitidaException;
+import com.ifpe.projetoCMA.exception.recursoJaExisteException;
 import com.ifpe.projetoCMA.exception.verificacaoCamposNulosException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -102,6 +103,20 @@ public class ControllerExceptionHendler {
 		return ResponseEntity.status(status).body(erro);
 		
 	}
+
 	
+	@ExceptionHandler(recursoJaExisteException.class)
+	public ResponseEntity<ErroPadrao> recurçoExistente(recursoJaExisteException e, HttpServletRequest request){
+		
+		HttpStatus status = HttpStatus.NOT_ACCEPTABLE;
+		ErroPadrao erro =new ErroPadrao(
+				Instant.now(),
+				status.value(),
+				e.getMessage(),
+				request.getRequestURI() );
+		
+		return ResponseEntity.status(status).body(erro);
+		
+	}
 }
 	

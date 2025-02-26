@@ -61,7 +61,7 @@ public class QuestionarioService {
 		return quest.getVack().toVackResponse();
 	}
 	
-	@Transactional
+	
 	public QuestionarioResponse coletarQuestionario(long userId) {
 		
 		return retornarQuest(userId).toResponse();

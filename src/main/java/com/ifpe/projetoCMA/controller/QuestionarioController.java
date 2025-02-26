@@ -14,6 +14,7 @@ import com.ifpe.projetoCMA.controller.dto.request.VackRequest;
 import com.ifpe.projetoCMA.controller.dto.response.HonneyResponse;
 import com.ifpe.projetoCMA.controller.dto.response.QuestionarioResponse;
 import com.ifpe.projetoCMA.controller.dto.response.VackResponse;
+import com.ifpe.projetoCMA.service.ExtratorId;
 import com.ifpe.projetoCMA.service.QuestionarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,8 +39,7 @@ public class QuestionarioController {
 	public ResponseEntity<HonneyResponse> responderHonney(JwtAuthenticationToken token, @RequestBody HonneyRequest request){
 		
 			
-			long userId = Long.parseLong(token.getName());
-			HonneyResponse response = questiServi.responderHonney(request, userId);
+			HonneyResponse response = questiServi.responderHonney(request, ExtratorId.extrair(token));
 			
 			
 			return ResponseEntity.ok(null);
@@ -56,8 +56,7 @@ public class QuestionarioController {
 	public ResponseEntity<VackResponse> responderVack(JwtAuthenticationToken token, @RequestBody VackRequest request){
 	
 			
-			long userId = Long.parseLong(token.getName());
-			VackResponse response = questiServi.responderVack(request, userId);
+			VackResponse response = questiServi.responderVack(request, ExtratorId.extrair(token));
 			
 			
 			return ResponseEntity.ok(response);
@@ -71,7 +70,7 @@ public class QuestionarioController {
 	@GetMapping(value = "/")
 	public ResponseEntity<QuestionarioResponse> coletarQuestionario(JwtAuthenticationToken token){
 		
-		QuestionarioResponse response = questiServi.coletarQuestionario(0);
+		QuestionarioResponse response = questiServi.coletarQuestionario(ExtratorId.extrair(token));
 		
 		return ResponseEntity.ok(response);
 	}
@@ -83,10 +82,8 @@ public class QuestionarioController {
 	@DeleteMapping(value = "/honney")
 	public ResponseEntity deletarHonney(JwtAuthenticationToken token, @RequestBody String senha) {
 		
-			
-			long userId = Long.parseLong(token.getName());
-
-			questiServi.deletarHonney( senha, userId );
+		
+			questiServi.deletarHonney( senha, ExtratorId.extrair(token) );
 			
 			return ResponseEntity.ok().build();
 			
@@ -102,9 +99,7 @@ public class QuestionarioController {
 	@DeleteMapping(value = "/vack")
 	public ResponseEntity deletarVack(JwtAuthenticationToken token, @RequestBody String senha) {
 			
-			long userId = Long.parseLong(token.getName());
-
-			questiServi.deletarVack( senha, userId );
+			questiServi.deletarVack( senha, ExtratorId.extrair(token) );
 			
 			return ResponseEntity.ok().build();
 		

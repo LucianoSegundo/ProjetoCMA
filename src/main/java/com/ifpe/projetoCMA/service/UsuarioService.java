@@ -103,6 +103,7 @@ public class UsuarioService {
 		}
 
 	}
+	
 	@Transactional(readOnly = true)
 	public List<CadastroResponse> ListarUsuarios( ) {
 		
