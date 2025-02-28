@@ -1,7 +1,15 @@
 package com.ifpe.projetoCMA.entity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import com.ifpe.projetoCMA.controller.dto.request.CoreografiaRequest;
+import com.ifpe.projetoCMA.controller.dto.response.AtividadeResponse;
+import com.ifpe.projetoCMA.controller.dto.response.CoreografiaResponse;
+import com.ifpe.projetoCMA.controller.dto.response.QuestionarioResponse;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -17,8 +25,10 @@ public class Coreografia {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
+	private String nome;
+
 	private String aprendizado;
 	
 	private String conhecimento;
@@ -39,10 +49,13 @@ public class Coreografia {
 		this.atividades = new ArrayList<Atividades>();
 	}
 	
-	public Coreografia(Usuario usuario) {
+	public Coreografia(Usuario usuario, CoreografiaRequest coreo) {
 		super();
 		this.autor = usuario;
 		this.atividades = new ArrayList<Atividades>();
+		this.aprendizado = coreo.aprendizado();
+		this.conhecimento = coreo.conhecimento();
+		this.nome = coreo.nome();
 	}
 	
 	public boolean adicionarAtividade(Atividades atividade) {
@@ -56,11 +69,22 @@ public class Coreografia {
 		this.atividades.remove(atividade);
 		return true;
 		}
+	
+	public CoreografiaResponse toresponse() {
+		
+		QuestionarioResponse questResponse = this.autor.getQuestionario().toResponse();
+		
+		List<AtividadeResponse> atividadesResponse = this.atividades.stream().map(x -> x.toResponse()).collect(Collectors.toList());
+		
+		CoreografiaResponse response = new CoreografiaResponse(this.id, nome, aprendizado, conhecimento, questResponse , atividadesResponse);
+		
+		return response;
+	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getAprendizado() {
@@ -94,6 +118,34 @@ public class Coreografia {
 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(aprendizado, atividades, autor, conhecimento, id, nome, turma);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Coreografia other = (Coreografia) obj;
+		return Objects.equals(aprendizado, other.aprendizado) && Objects.equals(atividades, other.atividades)
+				&& Objects.equals(autor, other.autor) && Objects.equals(conhecimento, other.conhecimento)
+				&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
+				&& Objects.equals(turma, other.turma);
 	}
 	
 	

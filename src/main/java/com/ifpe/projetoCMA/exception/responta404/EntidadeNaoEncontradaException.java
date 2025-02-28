@@ -1,4 +1,4 @@
-package com.ifpe.projetoCMA.exception;
+package com.ifpe.projetoCMA.exception.responta404;
 
 public class EntidadeNaoEncontradaException extends RuntimeException {
 

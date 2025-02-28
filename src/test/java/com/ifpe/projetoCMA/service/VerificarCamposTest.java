@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.ifpe.projetoCMA.exception.verificacaoCamposNulosException;
+import com.ifpe.projetoCMA.exception.resposta400.verificacaoCamposNulosException;
 
 @SpringBootTest
 @ActiveProfiles("test")

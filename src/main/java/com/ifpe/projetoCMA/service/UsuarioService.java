@@ -20,10 +20,10 @@ import com.ifpe.projetoCMA.entity.Notificacao;
 import com.ifpe.projetoCMA.entity.Papel;
 import com.ifpe.projetoCMA.entity.Questionario;
 import com.ifpe.projetoCMA.entity.Usuario;
-import com.ifpe.projetoCMA.exception.AcessoNegadoException;
-import com.ifpe.projetoCMA.exception.CadastroNedadoException;
-import com.ifpe.projetoCMA.exception.EntidadeNaoEncontradaException;
-import com.ifpe.projetoCMA.exception.ausenciaDeDadosException;
+import com.ifpe.projetoCMA.exception.responta404.EntidadeNaoEncontradaException;
+import com.ifpe.projetoCMA.exception.resposta400.AcessoNegadoException;
+import com.ifpe.projetoCMA.exception.resposta406.ausenciaDeDadosException;
+import com.ifpe.projetoCMA.exception.resposta422.CadastroNedadoException;
 import com.ifpe.projetoCMA.repository.PapelRepository;
 import com.ifpe.projetoCMA.repository.UsuarioRepository;
 
@@ -46,6 +46,9 @@ public class UsuarioService {
 	
 	@Transactional()
 	public CadastroResponse cadastroUsuario(CadastroRequest cadRequest) {
+		
+		// validação de atributos
+		
 		if (VerificarCampos.verificarTemCamposNulos(cadRequest))
 			throw new CadastroNedadoException("Nenhum campo das informações do usuário deve ser nulo");
 
@@ -64,19 +67,21 @@ public class UsuarioService {
 		if (VerificarCampos.validarEmail(cadRequest.email()) == false)
 			throw new CadastroNedadoException("Email invalido");
 		
-
+		// execução da criação
 
 		Usuario user = new Usuario(cadRequest);
 
 		String senhaCodificada = codSenha.encode(cadRequest.senha());
 
 		Papel papel = papelRepo.findByAutoridade("aluno").orElseThrow(()-> new ausenciaDeDadosException("ouve um problema interno") );
-	
+		
+		papel.addUsuario(user);
+		
 		user.addPapel(papel);
+		
 		user.setSenha(senhaCodificada);
 		
 		Usuario usuarioSalvo = userRepo.save(user);
-		
 
 		CadastroResponse response = new CadastroResponse(usuarioSalvo.getUsuario(), "Usuario foi salvo com sucesso");
 		return response;

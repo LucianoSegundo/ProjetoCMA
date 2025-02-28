@@ -33,7 +33,7 @@ public class QuestionarioController {
 	
 	@Operation( summary = "Rota para o registro do Questionario Honney" , description = "Rota requer autenticação, deve ser anexado o token de autenticação, adiquirido no momento do login, ao cabeçalho da requisição..")
 	@ApiResponse(responseCode = "200", description = "cadastro do questionario bem sucedido")
-	@ApiResponse(responseCode = "401", description = "cadastro de questionario negado devido a campos nulos")
+	@ApiResponse(responseCode = "422", description = "cadastro de questionario negado devido a campos nulos")
 	@ApiResponse(responseCode = "404", description = "Nenhum usuário com este id")	
 	@PostMapping(value = "/honney")
 	public ResponseEntity<HonneyResponse> responderHonney(JwtAuthenticationToken token, @RequestBody HonneyRequest request){
@@ -49,7 +49,7 @@ public class QuestionarioController {
 
 	@Operation( summary = "Rota para o registro do Questionario Vack" , description = "Rota requer autenticação, vincula o questionario Vack enviado id de usuario presente no token")
 	@ApiResponse(responseCode = "200", description = "cadastro bem sucedido")
-	@ApiResponse(responseCode = "401", description = "cadastro negado devido a campos nulos")	
+	@ApiResponse(responseCode = "422", description = "cadastro negado devido a campos nulos")	
 	@ApiResponse(responseCode = "404", description = "Nenhum usuário com este id")	
 
 	@PostMapping(value = "/vack")
@@ -77,7 +77,7 @@ public class QuestionarioController {
 	
 	@Operation( summary = "Rota para deletar o questionario HonneyAlonso do usuario" , description = "Rota requer autenticação, serve para deletar o questionario honneyAlonso do usuario, deixando o espaço com um questionario zerado, recebe a senha do usuario no corpo do requisição")
 	@ApiResponse(responseCode = "200", description = "exclusão bem sucedido")
-	@ApiResponse(responseCode = "401", description = "exclusão negada")
+	@ApiResponse(responseCode = "422", description = "exclusão negada")
 	@ApiResponse(responseCode = "404", description = "Nenhum usuário com este id")	
 	@DeleteMapping(value = "/honney")
 	public ResponseEntity deletarHonney(JwtAuthenticationToken token, @RequestBody String senha) {
@@ -94,7 +94,7 @@ public class QuestionarioController {
 	
 	@Operation( summary = "Rota para deletar o questionario Vack do usuario" , description = "Rota requer autenticação, serve para deletar o questionario vack do usuario, deixando o espaço com um questionario zerado, recebe a senha do usuario no corpo do requisição")
 	@ApiResponse(responseCode = "200", description = "exclusão bem sucedido")
-	@ApiResponse(responseCode = "401", description = "exclusão negada")
+	@ApiResponse(responseCode = "422", description = "exclusão negada")
 	@ApiResponse(responseCode = "404", description = "Nenhum usuário com este id")	
 	@DeleteMapping(value = "/vack")
 	public ResponseEntity deletarVack(JwtAuthenticationToken token, @RequestBody String senha) {

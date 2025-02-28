@@ -27,7 +27,7 @@ import com.ifpe.projetoCMA.entity.Notificacao;
 import com.ifpe.projetoCMA.entity.Papel;
 import com.ifpe.projetoCMA.entity.Questionario;
 import com.ifpe.projetoCMA.entity.Usuario;
-import com.ifpe.projetoCMA.exception.operacaoNaoPermitidaException;
+import com.ifpe.projetoCMA.exception.resposta422.operacaoNaoPermitidaException;
 import com.ifpe.projetoCMA.repository.UsuarioRepository;
 
 

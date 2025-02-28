@@ -46,7 +46,7 @@ public class UsuarioController {
 	
 	@Operation(summary = "Rota Cadastro de Usuário", description = "Recebe String nome, String senha, String Email retorna o o nome do usuário  por formalidade. O email deve seguir a e regex ^[A-Za-z0-9+_.-]+@(.+)$. Enquanto a senha deve conter no minimo 8 numeros, no minimo 1 numero e no minimo 1 caracter especial ")
 	@ApiResponse(responseCode = "200", description = "cadastro bem sucedido")
-	@ApiResponse(responseCode = "401", description = "o cadastro foi negado, um dos possiveis motivos é retornado como mensagem")
+	@ApiResponse(responseCode = "422", description = "o cadastro foi negado, um dos possiveis motivos é retornado como mensagem")
 	@ApiResponse(responseCode = "500", description = "Os papeis não estão cadastrados no banco de dados, então não puderam ser recuperados para a realização do cadastro.")
 
 	@PostMapping(value = "/")

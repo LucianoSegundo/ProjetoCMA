@@ -1,4 +1,4 @@
-package com.ifpe.projetoCMA.exception;
+package com.ifpe.projetoCMA.exception.resposta400;
 
 public class AcessoNegadoException extends RuntimeException {
 	public AcessoNegadoException(String mensagem) {

@@ -1,4 +1,4 @@
-package com.ifpe.projetoCMA.exception;
+package com.ifpe.projetoCMA.exception.outrasRespostas;
 
 public class recursoJaExisteException extends RuntimeException {
 

@@ -12,8 +12,8 @@ import com.ifpe.projetoCMA.controller.dto.response.VackResponse;
 import com.ifpe.projetoCMA.entity.QuestHonney;
 import com.ifpe.projetoCMA.entity.QuestVack;
 import com.ifpe.projetoCMA.entity.Questionario;
-import com.ifpe.projetoCMA.exception.EntidadeNaoEncontradaException;
-import com.ifpe.projetoCMA.exception.operacaoNaoPermitidaException;
+import com.ifpe.projetoCMA.exception.responta404.EntidadeNaoEncontradaException;
+import com.ifpe.projetoCMA.exception.resposta422.operacaoNaoPermitidaException;
 import com.ifpe.projetoCMA.repository.QuestionarioRepositorio;
 
 @Service

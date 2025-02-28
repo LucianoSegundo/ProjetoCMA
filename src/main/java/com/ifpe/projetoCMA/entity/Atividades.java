@@ -3,6 +3,8 @@ package com.ifpe.projetoCMA.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ifpe.projetoCMA.controller.dto.response.AtividadeResponse;
+
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -53,6 +55,10 @@ public class Atividades {
 		return true;
 		}
 
+	public AtividadeResponse toResponse() {
+		
+		return new AtividadeResponse(id, nome, conteudo);
+	}
 	
 	public long getId() {
 		return id;

@@ -7,13 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.ifpe.projetoCMA.exception.AcessoNegadoException;
-import com.ifpe.projetoCMA.exception.CadastroNedadoException;
-import com.ifpe.projetoCMA.exception.EntidadeNaoEncontradaException;
-import com.ifpe.projetoCMA.exception.ausenciaDeDadosException;
-import com.ifpe.projetoCMA.exception.operacaoNaoPermitidaException;
-import com.ifpe.projetoCMA.exception.recursoJaExisteException;
-import com.ifpe.projetoCMA.exception.verificacaoCamposNulosException;
+import com.ifpe.projetoCMA.exception.outrasRespostas.CredenciaisInvalidasException;
+import com.ifpe.projetoCMA.exception.outrasRespostas.recursoJaExisteException;
+import com.ifpe.projetoCMA.exception.responta404.EntidadeNaoEncontradaException;
+import com.ifpe.projetoCMA.exception.resposta400.AcessoNegadoException;
+import com.ifpe.projetoCMA.exception.resposta400.verificacaoCamposNulosException;
+import com.ifpe.projetoCMA.exception.resposta406.ausenciaDeDadosException;
+import com.ifpe.projetoCMA.exception.resposta422.CadastroNedadoException;
+import com.ifpe.projetoCMA.exception.resposta422.operacaoNaoPermitidaException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -48,24 +49,11 @@ public class ControllerExceptionHendler {
 		
 	}
 	
-	@ExceptionHandler(CadastroNedadoException.class)
-	public ResponseEntity<ErroPadrao> cadastroNegado(CadastroNedadoException e, HttpServletRequest request){
-		
-		HttpStatus status = HttpStatus.UNAUTHORIZED;
-		ErroPadrao erro =new ErroPadrao(
-				Instant.now(),
-				status.value(),
-				e.getMessage(),
-				request.getRequestURI() );
-		
-		return ResponseEntity.status(status).body(erro);
-		
-	}
 	
 	@ExceptionHandler(operacaoNaoPermitidaException.class)
 	public ResponseEntity<ErroPadrao> operacaoNaoPermitida(operacaoNaoPermitidaException e, HttpServletRequest request){
 		
-		HttpStatus status = HttpStatus.UNAUTHORIZED;
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 		ErroPadrao erro =new ErroPadrao(
 				Instant.now(),
 				status.value(),
@@ -118,5 +106,21 @@ public class ControllerExceptionHendler {
 		return ResponseEntity.status(status).body(erro);
 		
 	}
+	
+	@ExceptionHandler(CredenciaisInvalidasException.class)
+	public ResponseEntity<ErroPadrao> credenciaisInvalidas(CredenciaisInvalidasException e, HttpServletRequest request){
+		
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+		ErroPadrao erro =new ErroPadrao(
+				Instant.now(),
+				status.value(),
+				e.getMessage(),
+				request.getRequestURI() );
+		
+		return ResponseEntity.status(status).body(erro);
+		
+	}
+	
+	
 }
 	

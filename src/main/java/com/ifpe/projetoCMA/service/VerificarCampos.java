@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.ifpe.projetoCMA.exception.verificacaoCamposNulosException;
+import com.ifpe.projetoCMA.exception.resposta400.verificacaoCamposNulosException;
 
 public class VerificarCampos {
 

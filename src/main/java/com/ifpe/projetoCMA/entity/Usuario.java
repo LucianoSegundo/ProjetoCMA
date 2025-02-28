@@ -3,6 +3,7 @@ package com.ifpe.projetoCMA.entity;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import com.ifpe.projetoCMA.controller.dto.request.CadastroRequest;
@@ -60,6 +61,9 @@ public class Usuario {
 	@OneToOne(mappedBy = "autor", cascade = CascadeType.ALL,  orphanRemoval = true )
 	private Questionario  questionario;
 	
+	@OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<Coreografia> coreografias;
+	
 	public Usuario() {
 		super();
 		
@@ -68,6 +72,7 @@ public class Usuario {
 		this.notificacao = new ArrayList<Notificacao>();
 		this.turmasCAluno = new ArrayList<Turma>();
 		this.turmasCProfessor = new  ArrayList<Turma>();
+		this.coreografias = new ArrayList<Coreografia>();
 	}
 	
 	public Usuario(CadastroRequest usuario) {
@@ -80,6 +85,8 @@ public class Usuario {
 		this.notificacao = new ArrayList<Notificacao>();
 		this.turmasCAluno = new ArrayList<Turma>();
 		this.turmasCProfessor = new  ArrayList<Turma>();
+		this.coreografias = new ArrayList<Coreografia>();
+
 	}
 
 	public Long getId() {
@@ -147,6 +154,29 @@ public class Usuario {
 
 	public void setQuestionario(Questionario questionario) {
 		this.questionario = questionario;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(Papeis, coreografias, email, id, nome, notificacao, questionario, senha, turmasCAluno,
+				turmasCProfessor, usuario);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(Papeis, other.Papeis) && Objects.equals(coreografias, other.coreografias)
+				&& Objects.equals(email, other.email) && Objects.equals(id, other.id)
+				&& Objects.equals(nome, other.nome) && Objects.equals(notificacao, other.notificacao)
+				&& Objects.equals(questionario, other.questionario) && Objects.equals(senha, other.senha)
+				&& Objects.equals(turmasCAluno, other.turmasCAluno)
+				&& Objects.equals(turmasCProfessor, other.turmasCProfessor) && Objects.equals(usuario, other.usuario);
 	}
 
 	

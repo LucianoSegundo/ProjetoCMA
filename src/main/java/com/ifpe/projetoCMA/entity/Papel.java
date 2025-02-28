@@ -1,5 +1,6 @@
 package com.ifpe.projetoCMA.entity;
 
+import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -30,12 +31,19 @@ public class Papel {
 	
 	public Papel() {
 		super();
+		
 	}
 
 	public Papel( String autoridade, Set<Usuario> usuario) {
 		super();
 		this.autoridade = autoridade;
 		this.usuarios = usuario;
+	}
+	
+	public void addUsuario(Usuario user) {
+		if(user != null) {
+			usuarios.add(user);
+		}
 	}
 
 	public long getId() {
@@ -60,6 +68,23 @@ public class Papel {
 
 	public void setAutoridade(String autoridade) {
 		this.autoridade = autoridade;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(autoridade, id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Papel other = (Papel) obj;
+		return Objects.equals(autoridade, other.autoridade) && id == other.id;
 	}
 
 	

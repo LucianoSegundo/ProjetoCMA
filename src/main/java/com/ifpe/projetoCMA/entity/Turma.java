@@ -2,6 +2,7 @@ package com.ifpe.projetoCMA.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -86,6 +87,26 @@ public class Turma {
 	public void setCoreografias(List<Coreografia> coreografias) {
 		this.coreografias = coreografias;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(Alunos, coreografias, id, nome, professor);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Turma other = (Turma) obj;
+		return Objects.equals(Alunos, other.Alunos) && Objects.equals(coreografias, other.coreografias)
+				&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
+				&& Objects.equals(professor, other.professor);
+	}
+	
 	
 	
 }

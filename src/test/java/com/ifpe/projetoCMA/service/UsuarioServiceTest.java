@@ -34,9 +34,9 @@ import com.ifpe.projetoCMA.entity.Notificacao;
 import com.ifpe.projetoCMA.entity.Papel;
 import com.ifpe.projetoCMA.entity.Questionario;
 import com.ifpe.projetoCMA.entity.Usuario;
-import com.ifpe.projetoCMA.exception.AcessoNegadoException;
-import com.ifpe.projetoCMA.exception.CadastroNedadoException;
-import com.ifpe.projetoCMA.exception.EntidadeNaoEncontradaException;
+import com.ifpe.projetoCMA.exception.responta404.EntidadeNaoEncontradaException;
+import com.ifpe.projetoCMA.exception.resposta400.AcessoNegadoException;
+import com.ifpe.projetoCMA.exception.resposta422.CadastroNedadoException;
 import com.ifpe.projetoCMA.repository.PapelRepository;
 import com.ifpe.projetoCMA.repository.UsuarioRepository;
 

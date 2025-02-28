@@ -36,7 +36,8 @@ public class CoreografiaController {
 
 	@Operation(summary = "Rota de criação de Coreografiar", description = "nehum dos valores requerido deve ser branco ou nulo.")
 	@ApiResponse(responseCode = "200", description = "criação bem sucedido")
-	@ApiResponse(responseCode = "401", description = "A criação da coreografia foi negada")
+	@ApiResponse(responseCode = "422", description = "A criação da coreografia foi negada")
+	@ApiResponse(responseCode = "404", description = "Usuario não encontrado")
 	@ApiResponse(responseCode = "406", description = "já existe uma coreografia com este nome para este usuario")
 	@PostMapping(value = "/")
 	public ResponseEntity<CoreografiaResponse> criarCoreografia(JwtAuthenticationToken token, @RequestBody CoreografiaRequest coreo ){
@@ -58,7 +59,8 @@ public class CoreografiaController {
 	@Operation(summary = "Rota de deleção de Coreografias", description = "Deleção de coreografia, ao deletar ela será perdida para sempre")
 	@ApiResponse(responseCode = "200", description = "deleção bem sucedida")
 	@ApiResponse(responseCode = "404", description = "entidade não foi encontrada")
-	@ApiResponse(responseCode = "401", description = "permissão de deleção negada devido a senha incorreta ou senha nula")
+	@ApiResponse(responseCode = "401", description = "senha incorreta")
+	@ApiResponse(responseCode = "422", description = "permissão de deleção negada, causas posssiveis, Id do usuario ou coreografia nulo, senha incorreta ou senha nula")
 	@DeleteMapping(value = "/deletar/{coreoId}")
 	public ResponseEntity<Void> deletarCoreografia(JwtAuthenticationToken token,@RequestBody String senha, @PathVariable Long coreoId ){
 		
