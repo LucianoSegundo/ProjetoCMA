@@ -14,6 +14,7 @@ import com.ifpe.projetoCMA.controller.dto.request.VackRequest;
 import com.ifpe.projetoCMA.controller.dto.response.HonneyResponse;
 import com.ifpe.projetoCMA.controller.dto.response.QuestionarioResponse;
 import com.ifpe.projetoCMA.controller.dto.response.VackResponse;
+
 import com.ifpe.projetoCMA.service.ExtratorId;
 import com.ifpe.projetoCMA.service.QuestionarioService;
 
@@ -42,7 +43,7 @@ public class QuestionarioController {
 			HonneyResponse response = questiServi.responderHonney(request, ExtratorId.extrair(token));
 			
 			
-			return ResponseEntity.ok(null);
+			return ResponseEntity.ok(response);
 		
 		
 	}
