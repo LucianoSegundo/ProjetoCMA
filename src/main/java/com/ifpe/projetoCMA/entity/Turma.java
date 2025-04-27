@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,15 +38,22 @@ public class Turma {
 	@OneToMany(mappedBy = "turma")
 	private List<Coreografia> coreografias;
 	
+	@OneToMany(mappedBy = "turma", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Postagem> Postagens;
+	
 	public Turma() {
 		this.coreografias = new ArrayList<Coreografia>();
 		this.Alunos = new ArrayList<Usuario>();
+		this.Postagens = new ArrayList<Postagem>();
+
 	}
 	
 	public Turma(Usuario professor) {
 		this.coreografias = new ArrayList<Coreografia>();
 		this.Alunos = new ArrayList<Usuario>();
 		this.professor = professor;
+		this.Postagens = new ArrayList<Postagem>();
+
 	}
 
 	public Long getId() {
@@ -105,6 +113,14 @@ public class Turma {
 		return Objects.equals(Alunos, other.Alunos) && Objects.equals(coreografias, other.coreografias)
 				&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
 				&& Objects.equals(professor, other.professor);
+	}
+
+	public List<Postagem> getPostagens() {
+		return Postagens;
+	}
+
+	public void setPostagens(List<Postagem> postagens) {
+		Postagens = postagens;
 	}
 	
 	

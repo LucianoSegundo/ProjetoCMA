@@ -64,6 +64,12 @@ public class Usuario {
 	@OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<Coreografia> coreografias;
 	
+	@OneToMany(mappedBy = "autor", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Comentario> comentarios;
+	
+	@OneToMany(mappedBy = "autor", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Postagem> Postagens;
+	
 	public Usuario() {
 		super();
 		
@@ -73,6 +79,10 @@ public class Usuario {
 		this.turmasCAluno = new ArrayList<Turma>();
 		this.turmasCProfessor = new  ArrayList<Turma>();
 		this.coreografias = new ArrayList<Coreografia>();
+		this.Postagens = new ArrayList<Postagem>();
+		this.comentarios = new ArrayList<Comentario>();
+
+		
 	}
 	
 	public Usuario(CadastroRequest usuario) {
@@ -86,7 +96,8 @@ public class Usuario {
 		this.turmasCAluno = new ArrayList<Turma>();
 		this.turmasCProfessor = new  ArrayList<Turma>();
 		this.coreografias = new ArrayList<Coreografia>();
-
+		this.Postagens = new ArrayList<Postagem>();
+		this.comentarios = new ArrayList<Comentario>();
 	}
 
 	public Long getId() {
@@ -177,6 +188,46 @@ public class Usuario {
 				&& Objects.equals(questionario, other.questionario) && Objects.equals(senha, other.senha)
 				&& Objects.equals(turmasCAluno, other.turmasCAluno)
 				&& Objects.equals(turmasCProfessor, other.turmasCProfessor) && Objects.equals(usuario, other.usuario);
+	}
+
+	public List<Turma> getTurmasCProfessor() {
+		return turmasCProfessor;
+	}
+
+	public void setTurmasCProfessor(List<Turma> turmasCProfessor) {
+		this.turmasCProfessor = turmasCProfessor;
+	}
+
+	public List<Turma> getTurmasCAluno() {
+		return turmasCAluno;
+	}
+
+	public void setTurmasCAluno(List<Turma> turmasCAluno) {
+		this.turmasCAluno = turmasCAluno;
+	}
+
+	public List<Coreografia> getCoreografias() {
+		return coreografias;
+	}
+
+	public void setCoreografias(List<Coreografia> coreografias) {
+		this.coreografias = coreografias;
+	}
+
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	public List<Postagem> getPostagens() {
+		return Postagens;
+	}
+
+	public void setPostagens(List<Postagem> postagens) {
+		Postagens = postagens;
 	}
 
 	

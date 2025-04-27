@@ -43,10 +43,14 @@ public class Coreografia {
 	
 	@OneToMany(mappedBy = "coreografia", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Atividades> atividades;
+	
+	@OneToMany(mappedBy = "coreografia", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Comentario> comentarios;
 
 	public Coreografia() {
 		super();
 		this.atividades = new ArrayList<Atividades>();
+		this.comentarios = new ArrayList<Comentario>();
 	}
 	
 	public Coreografia(Usuario usuario, CoreografiaRequest coreo) {
@@ -56,6 +60,8 @@ public class Coreografia {
 		this.aprendizado = coreo.aprendizado();
 		this.conhecimento = coreo.conhecimento();
 		this.nome = coreo.nome();
+		this.comentarios = new ArrayList<Comentario>();
+
 	}
 	
 	public boolean adicionarAtividade(Atividades atividade) {
@@ -146,6 +152,14 @@ public class Coreografia {
 				&& Objects.equals(autor, other.autor) && Objects.equals(conhecimento, other.conhecimento)
 				&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
 				&& Objects.equals(turma, other.turma);
+	}
+
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
 	}
 	
 	
