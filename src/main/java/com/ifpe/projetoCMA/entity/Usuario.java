@@ -230,6 +230,9 @@ public class Usuario {
 		Postagens = postagens;
 	}
 
+	public Boolean  addPostagem(Postagem postagens) {
+		return this.Postagens.add(postagens);
+	}
 	
 	
 }

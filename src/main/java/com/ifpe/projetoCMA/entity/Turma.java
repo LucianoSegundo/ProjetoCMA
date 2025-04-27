@@ -123,6 +123,10 @@ public class Turma {
 		Postagens = postagens;
 	}
 	
+	public Boolean  addPostagem(Postagem postagens) {
+		return this.Postagens.add(postagens);
+	}
+	
 	
 	
 }
